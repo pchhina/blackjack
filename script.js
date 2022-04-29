@@ -1,3 +1,4 @@
+/* Player class for BlackJack */
 class Player {
 	constructor() {
 		this.cards = [];
@@ -23,11 +24,13 @@ class Player {
 		return this.sum === 21;
 	}
 
+	// adds another card to player's set and update sum
 	getAnotherCard() {
 		this.cards.push(generateCard());
 		this.sum += this.cards[this.cards.length - 1];
 	}
 
+	// prints card values from player's set
 	printCards() {
 		message = '';
 		for (let card of this.cards) {
@@ -38,6 +41,7 @@ class Player {
 
 }
 
+/* Game class for BlackJack game*/
 class Game {
 	constructor() {
 		this.player = new Player();
@@ -45,12 +49,13 @@ class Game {
 		this.updateGame();
 	}
 
+	// updates game message based on player status
 	updateGame() {
 		if (this.player.isAlive()) {
 			this.message = "Do you want to draw another card?";
 		} else if (this.player.hasBlackJack()) {
 			this.message = "Wohoo! You've got BlackJack!";
-			newCard.disabled = true;
+			newCard.disabled = true; // disable new card generation
 		} else {
 			this.message = "You're out of the game!";
 			newCard.disabled = true;
@@ -58,8 +63,8 @@ class Game {
 	}
 }
 
-// UI
 
+/* UI class for the BlackJack game*/
 class UI {
 	constructor() {
 		this.game;
@@ -68,6 +73,7 @@ class UI {
 		this.sumEl = document.getElementById('sum');
 	}
 
+	// updates message, card values and sum of cards
 	updateMessages() {
 		this.messageEl.textContent = this.game.message;
 		this.cardsEl.textContent = this.game.player.printCards();
@@ -86,13 +92,20 @@ class UI {
 	}
 }
 
+/* Main body of the program. Adds event handlers to buttons
+for starting a new game and adding more cards*/
+
 // new UI
 let ui;
+// start the game by clicking 'START GAME' button
 const startButton = document.getElementById('start-game');
 startButton.addEventListener('click', playGame);
+
+// button handler for adding a new card
 const newCard = document.querySelector('#new-card');
 newCard.addEventListener('click', playAnotherCard);
 
+// helper function to start the game and add new card
 function playGame() {
 	ui = new UI();
 	ui.playGame();
@@ -103,7 +116,7 @@ function playAnotherCard() {
 }
 
 
-// card helper functions
+// helper functions for generating random cards
 
 function generateCard() {
 	return randomInt(2, 11);
