@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Inter);
+
+body {
+	margin: 0;
+	background-color: darkolivegreen;
+	color: white;
+	text-align: center;
+	font-family: 'Inter';
+}
+
+h1 {
+	font-size: 5em;
+	color: gold;
+}
+
+h2 {
+	font-size: 3em;
+}
+
+#message {
+	font-style: italic;
+}
+
+button {
+	margin: 10px auto;
+	color: #016f32;
+	background-color: goldenrod;
+	width: 350px;
+	font-size: 3em;
+	text-transform: uppercase;
+	font-weight: bold;
+	border: none;
+	border-radius: 2px;
+	display: block;
+}
