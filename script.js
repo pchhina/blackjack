@@ -26,8 +26,10 @@ class Player {
 
 	// adds another card to player's set and update sum
 	getAnotherCard() {
-		this.cards.push(generateCard());
-		this.sum += this.cards[this.cards.length - 1];
+		if (this.isAlive() && !this.hasBlackJack()) {
+			this.cards.push(generateCard());
+			this.sum += this.cards[this.cards.length - 1];
+		}
 	}
 
 	// prints card values from player's set
@@ -55,10 +57,8 @@ class Game {
 			this.message = "Do you want to draw another card?";
 		} else if (this.player.hasBlackJack()) {
 			this.message = "Wohoo! You've got BlackJack!";
-			newCard.disabled = true; // disable new card generation
 		} else {
 			this.message = "You're out of the game!";
-			newCard.disabled = true;
 		}
 	}
 }
@@ -119,7 +119,14 @@ function playAnotherCard() {
 // helper functions for generating random cards
 
 function generateCard() {
-	return randomInt(2, 11);
+	let cardValue = randomInt(1, 13);
+	if (cardValue > 10) {
+		return 10;
+	} else if (cardValue === 1) {
+		return 11;
+	} else {
+		return cardValue;
+	}
 }
 
 // produces a random integer in range [m, n]
